@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishGuard AI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <svg class="shield-icon" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2L4 6V11C4 16.5 7.5 21.5 12 23C16.5 21.5 20 16.5 20 11V6L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="title-section">
+                <h1 class="title">PHISH<span class="title-accent">GUARD</span></h1>
+                <p class="subtitle">AI-POWERED PROTECTION</p>
+            </div>
+            <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="gauge-container">
+            <svg class="gauge-svg" viewBox="0 0 200 200">
+                <defs>
+                    <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <circle class="gauge-bg" cx="100" cy="100" r="85" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="12"/>
+                <circle class="gauge-progress" id="gaugeProgress" cx="100" cy="100" r="85" fill="none" stroke="url(#gaugeGradient)" stroke-width="12" stroke-linecap="round" transform="rotate(-90 100 100)" stroke-dasharray="534" stroke-dashoffset="534"/>
+            </svg>
+            <div class="gauge-content">
+                <div class="score-display" id="scoreDisplay">0</div>
+                <div class="score-label">Safety Score</div>
+                <div class="status-badge" id="statusBadge">
+                    <svg class="status-icon" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span id="statusText">SAFE</span>
+                </div>
+            </div>
+        </div>
+
+        <button class="scan-button" id="scanButton">
+            <svg class="scan-icon" viewBox="0 0 24 24" fill="none">
+                <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+                <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span>Scan Current Page</span>
+        </button>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <svg class="stat-icon blocked" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    <path d="M15 9l-6 6M9 9l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <div class="stat-value" id="blockedCount">0</div>
+                <div class="stat-label">Blocked</div>
+            </div>
+            <div class="stat-card">
+                <svg class="stat-icon scanned" viewBox="0 0 24 24" fill="none">
+                    <path d="M3 13h2l2-4 4 8 2-4h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+                <div class="stat-value" id="scannedCount">0</div>
+                <div class="stat-label">Scanned</div>
+            </div>
+            <div class="stat-card">
+                <svg class="stat-icon reports" viewBox="0 0 24 24" fill="none">
+                    <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+                <div class="stat-value" id="reportsCount">0</div>
+                <div class="stat-label">Reports</div>
+            </div>
+        </div>
+
+        <button class="report-button" id="reportButton">
+            <svg class="report-icon" viewBox="0 0 24 24" fill="none">
+                <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M12 9v4M12 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span>Report Phishing Site</span>
+        </button>
+
+        <div class="api-settings" id="apiSettings">
+            <div class="settings-header">
+                <span>API Settings</span>
+                <button class="settings-toggle" id="settingsToggle">⚙️</button>
+            </div>
+            <div class="settings-content" id="settingsContent">
+                <input type="text" id="apiUrl" placeholder="API URL" class="api-input" />
+                <button id="saveApi" class="save-button">Save</button>
+                <div class="api-status" id="apiStatus">
+                    <div class="status-dot" id="statusDot"></div>
+                    <span id="statusMessage">Checking connection...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <div class="toast-content"></div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
